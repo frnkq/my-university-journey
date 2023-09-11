@@ -74,11 +74,12 @@ class TimestampCollectorTest extends TestCase
 
     public function testFilenameIsProperlySplittedInDateAndTitle(): void
     {
-        $areDateAndTitleProperlySplit = function (Timestamp $timestamp) {
-            $timestampFilename = $timestamp->getDate()->format('Y-m-d') . '_' . $timestamp->getTitle() . '.md';
-            print_r($timestamp->getTitle());
-            $this->assertTrue(in_array($timestampFilename, scandir(self::$mockTimestampsPath)));
-        };
-        array_walk($this->collector->getTimestamps(), $areDateAndTitleProperlySplit);
+        array_walk(
+            $this->collector->getTimestamps(),
+            fn (Timestamp $timestamp) => $this->assertTrue(in_array(
+                $timestamp->getFileName(),
+                scandir(self::$mockTimestampsPath)
+            ))
+        );
     }
 }

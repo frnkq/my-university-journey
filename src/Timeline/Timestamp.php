@@ -22,4 +22,9 @@ class Timestamp {
    {
       return $this->date;
    }
+
+   public function getFileName(): string
+   {
+      return $this->date->format('Y-m-d') . '_' . $this->title . '.md';
+   }
 }
