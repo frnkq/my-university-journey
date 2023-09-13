@@ -48,7 +48,7 @@ class TimestampCollectorTest extends TestCase
         $this->collector = null;
     }
 
-    public function testCollectedTimestampsMatchesFilesEntries(): void
+    public function testCollectedTimestampsCountMatchesValidTimestampFilesCount(): void
     {
         $timestampsInDir = sizeof(array_filter(
             scandir(self::$mockTimestampsPath),
@@ -58,7 +58,7 @@ class TimestampCollectorTest extends TestCase
         $this->assertEquals(sizeof($this->collector->getTimestamps()), $timestampsInDir);
     }
 
-    public function testTimestampFilenameDateIsNotValidTimestampIsNotIncludedInTimeline(): void
+    public function testTimestampWithInvalidDateInFilenameIsNotCollected(): void
     {
         $this->assertIsArray($this->collector->getTimestamps());
         $this->assertNotContains('9764-01-22_this-should-not-be-included.md', $this->collector->getTimestamps());
@@ -72,7 +72,7 @@ class TimestampCollectorTest extends TestCase
         );
     }
 
-    public function testFilenameIsProperlySplittedInDateAndTitle(): void
+    public function testTimestampFilenameIsProperlySplittedInDateAndTitle(): void
     {
         array_walk(
             $this->collector->getTimestamps(),
