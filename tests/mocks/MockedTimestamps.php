@@ -1,6 +1,10 @@
 <?php
-$mockedTimestamps =
-    [
+
+namespace Tests\Mocks;
+
+class MockedTimestamps
+{
+    public static $timestamps = [
         [
             'name' => '2021-01-26_test-when-it-all-began.md',
             'contents' => 'testtestest1'
@@ -13,5 +17,5 @@ $mockedTimestamps =
             'name' => '9764-01-22_this-should-not-be-included.md',
             'contents' => 'testtestest'
         ],
-
     ];
+}
