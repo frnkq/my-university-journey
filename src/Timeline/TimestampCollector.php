@@ -40,6 +40,7 @@ class TimestampCollector
     {
         $date = new DateTime(explode('_', $filename)[0]);
         $title = substr(explode('_', $filename)[1], 0, -3);
-        return new Timestamp($date, $title);
+        $content = file_get_contents($this->timestampsPath . $filename);
+        return new Timestamp($date, $title, $content);
     }
 }

@@ -82,4 +82,16 @@ class TimestampCollectorTest extends TestCase
             ))
         );
     }
+
+    public function testTimestampHasFileContents(): void
+    {
+        array_walk(
+            $this->collector->getTimestamps(),
+            fn (Timestamp $timestamp) =>
+            $this->assertEquals(
+                $timestamp->getContent(),
+                file_get_contents(self::$mockTimestampsPath . $timestamp->getFileName())
+            )
+        );
+    }
 }

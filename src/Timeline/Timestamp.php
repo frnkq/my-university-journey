@@ -7,10 +7,11 @@ use DateTime;
 class Timestamp {
    private string $title;
    private DateTime $date;
-
-   public function __construct(DateTime $date, string $title){
+   private string $content;
+   public function __construct(DateTime $date, string $title, ?string $content){
         $this->title = $title;
         $this->date = $date;
+        $this->content = $content;
    } 
 
    public function getTitle(): string
@@ -26,5 +27,10 @@ class Timestamp {
    public function getFileName(): string
    {
       return $this->date->format('Y-m-d') . '_' . $this->title . '.md';
+   }
+
+   public function getContent(): string
+   {
+      return $this->content;
    }
 }
